@@ -8,15 +8,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
+import com.multichoice.crudDemo.exceptions.CustomerNotFoundException;
 import com.multichoice.crudDemo.exceptions.UnauthorizedException;
 import com.multichoice.crudDemo.models.Customer;
 import com.multichoice.crudDemo.utils.ConstantValues;
 
 @Service
-@CacheConfig(cacheNames = {"customer"})
+@CacheConfig(cacheNames = { "customer" })
 public class CustomerServiceImpl implements CustomerService {
 
 	private final Logger LOG = LoggerFactory.getLogger(CustomerServiceImpl.class);
@@ -44,7 +44,7 @@ public class CustomerServiceImpl implements CustomerService {
 		}
 		return message;
 	}
-	
+
 	@Cacheable
 	@Override
 	public List<Customer> getAllCustomers() {
@@ -59,6 +59,11 @@ public class CustomerServiceImpl implements CustomerService {
 			LOG.info("Customer with status - FALSE");
 			throw new UnauthorizedException("Not a Valid Customer");
 		}
+		
+		if(customer == null) {
+			throw new CustomerNotFoundException("Customer Record, does not exists");
+		}
+		
 		return customer;
 	}
 
@@ -71,7 +76,7 @@ public class CustomerServiceImpl implements CustomerService {
 			mongoTemplate.remove(customer);
 			deletedMessage = "Successfully removed the Customer Record";
 		} else {
-			deletedMessage = "Failed to  removed the Customer Record, as customer does not exists";
+			throw new CustomerNotFoundException("Failed to  removed the Customer Record, as customer does not exists");
 		}
 		return deletedMessage;
 	}
