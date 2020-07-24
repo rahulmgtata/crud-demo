@@ -2,28 +2,29 @@ package com.multichoice.crudDemo;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mockito;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-
-import com.multichoice.crudDemo.models.Customer;
-import com.multichoice.crudDemo.service.CustomerService;
+import org.springframework.test.context.junit4.SpringRunner;
 
 @SpringBootTest
-@ActiveProfiles("test")
-@RunWith(SpringJUnit4ClassRunner.class)
+@RunWith(SpringRunner.class)
 public class CrudDemoApplicationTests {
 	
-	@Autowired
-	private CustomerService customerService; 
-
 	@Test
-	   public void getCustomerById() {
-	   //   Mockito.when(customerService.getCustomerById("5f19e1a33439d135c003e87e")).thenReturn("Supriya");
-	      Customer testName = customerService.getCustomerById("5f19e1a33439d135c003e87e");
-	  //    Assert.assertEquals("Mock Product Name", testName);
-	   }
+	public void contextLoads() {
+	}
+	
+//	private final Logger LOG = LoggerFactory.getLogger(CrudDemoApplicationTests.class);
+//	
+//	@Autowired
+//	private CustomerService customerService; 
+//
+//	@Test
+//	   public void getCustomerById() {
+//		String expectedCustomerName = "Sagar";
+//	      Customer customer = customerService.getCustomerById("5f19e0083439d13bd4b57670");
+//	      LOG.info("customer :: "+customer);
+//	      LOG.info("customer :: "+customer.getCustomerName());
+//	      Assert.assertEquals(expectedCustomerName, customer.getCustomerName());
+//	   }
 
 }
