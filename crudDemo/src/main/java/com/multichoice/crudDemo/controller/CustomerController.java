@@ -44,13 +44,13 @@ public class CustomerController {
 	 * @param customer
 	 * @return Success or Failure message
 	 */
-	
+
 	@PostMapping(value = "/", consumes = "application/json", produces = "application/json")
 	public String updateCustomer(@RequestBody Customer customer) {
 		LOG.info("Update Customer.");
 		return customerService.updateCustomer(customer);
 	}
-	
+
 	/**
 	 * Method to delete a customer data
 	 * 
@@ -59,8 +59,7 @@ public class CustomerController {
 	 */
 	@DeleteMapping(value = "/{customerNumber}", produces = "application/json")
 	public String deleteCustomer(@PathVariable String customerNumber) {
-		LOG.info("Delete  Customer."+customerNumber);
-		//customerNumber
+		LOG.info("Delete  Customer." + customerNumber);
 		return customerService.deleteCustomer(customerNumber);
 	}
 
